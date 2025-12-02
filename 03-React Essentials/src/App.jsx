@@ -1,9 +1,17 @@
 import {CORE_CONCEPTS} from './data'
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import CoreConcepts from './components/CoreConcepts';
+import TabButton from './components/TabButton';
+import { useState } from 'react';
 
 
 function App() {
+  const [tabContent, setTabContent] = useState('Please click a button');
+    
+  function selectHandler(selectedButton) {
+    setTabContent(selectedButton);
+    console.log('Selected tab', selectedButton);
+  }
   return (
     <div>
       <Header />
@@ -11,13 +19,21 @@ function App() {
         <section id="core-concepts">
           <h2>Core Concepts</h2>
           <ul>
-            <CoreConcepts  {...CORE_CONCEPTS[0]} />
-            <CoreConcepts  {...CORE_CONCEPTS[1]}/>
-            <CoreConcepts  {...CORE_CONCEPTS[2]}/>
-            <CoreConcepts  {...CORE_CONCEPTS[3]}/>
+            {CORE_CONCEPTS.map(concept => (
+              <CoreConcepts  {...concept} />
+            ))}
           </ul>
         </section>
-        <h2>Time to get started!</h2>
+        <section id="examples">
+          <h2>Examples</h2>
+         <menu>
+           <TabButton onSelect={()=>selectHandler('Components')}>Components</TabButton>
+           <TabButton onSelect={()=>selectHandler('JSX')}>JSX</TabButton>
+           <TabButton onSelect={()=>selectHandler('Props')}>Props</TabButton>
+           <TabButton onSelect={()=>selectHandler('State')}>State</TabButton>
+         </menu>
+         {tabContent}
+        </section>
       </main>
     </div>
   );
