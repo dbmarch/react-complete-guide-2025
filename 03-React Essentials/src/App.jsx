@@ -21,16 +21,15 @@ function App() {
           <ul>
             {CORE_CONCEPTS.map(concept => (
               <CoreConcepts  {...concept} />
-            ))}
+            ))}                                                                                                                                                                                                                                                                                                                                               
           </ul>
         </section>
         <section id="examples">
           <h2>Examples</h2>
          <menu>
-           <TabButton onSelect={()=>selectHandler('Components')}>Components</TabButton>
-           <TabButton onSelect={()=>selectHandler('JSX')}>JSX</TabButton>
-           <TabButton onSelect={()=>selectHandler('Props')}>Props</TabButton>
-           <TabButton onSelect={()=>selectHandler('State')}>State</TabButton>
+          {CORE_CONCEPTS.map(concept => (
+            <TabButton onSelect={()=>selectHandler(concept.title)}>{concept.title}</TabButton>
+          ))}
          </menu>
          {tabContent}
         </section>
